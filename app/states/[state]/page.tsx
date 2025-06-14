@@ -6,7 +6,7 @@ import BackToTop from '@/components/BackToTop'
 
 // Generate static paths for all states
 export async function generateStaticParams() {
-  const paths = getStaticPaths()
+  const paths = await getStaticPaths()
   return paths.map((path) => ({
     state: path.params.state,
   }))
@@ -79,8 +79,8 @@ function EpisodeCard({ episode }: { episode: Episode }) {
   )
 }
 
-export default function StatePage({ params }: StatePageProps) {
-  const stateData = getStateData(params.state)
+export default async function StatePage({ params }: StatePageProps) {
+  const stateData = await getStateData(params.state)
   
   // Only reject if truly no data found
   if (!stateData) {

@@ -1,0 +1,54 @@
+[
+    {
+      "state": "AK",
+      "cities": [
+        {
+          "Anchorage": [
+            {
+              "Season": 224,
+              "Episode": 9,
+              "Date": "December 04, 2023",
+              "Title": "Town or Country in Alaska",
+              "Description": "A couple searches for a home with more space so they can grow their young family in Anchorage, Alaska...",
+              "City": "Anchorage",
+              "State": "AK"
+            }
+          ]
+        },
+        {
+          "Fairbanks": [
+            {
+              "Season": 48,
+              "Episode": 5,
+              "Date": "April 07, 2011",
+              "Title": "Alaska Duo Wants Sunny Getaway",
+              "Description": "A family of five wants to buy a second home in Hawaii for when they need a break from the long, dark...",
+              "City": "Fairbanks",
+              "State": "AK"
+            },
+            {
+              "Season": 223,
+              "Episode": 10,
+              "Date": "November 19, 2023",
+              "Title": "Ready for Adventure in Alaska",
+              "Description": "A couple decides to go for an unexpected job opportunity and move to Fairbanks, Alaska. He's looking for a rustic A-frame...",
+              "City": "Fairbanks",
+              "State": "AK"
+            }
+          ]
+        },
+        {
+          "Sitka": [
+            {
+              "Season": 238,
+              "Episode": 7,
+              "Date": "January 04, 2025",
+              "Title": "Anchoring Down in Sitka",
+              "Description": "Alaskan residents are ready to embrace an even wilder lifestyle by moving from Petersburg...",
+              "State": "AK"
+            }
+          ]
+        }
+      ]
+    }
+  ]
