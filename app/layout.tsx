@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import SimpleBMCButton from '@/components/SimpleBMCButton'
+import { Analytics } from "@vercel/analytics/next"
 
 
 export const metadata: Metadata = {
@@ -19,6 +20,7 @@ export default function RootLayout({
       <body className="antialiased">
         {children}
         <SimpleBMCButton username="jdwalters85" />
+        <Analytics />
       </body>
     </html>
   )
