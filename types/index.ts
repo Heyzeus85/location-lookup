@@ -26,12 +26,50 @@ export interface Episode {
     }[];
     totalEpisodes: number;
   }
+
+  // International episode types
+  export interface InternationalEpisode {
+    Season: number;
+    Episode: number;
+    Date: string | null;
+    Title: string;
+    Description: string;
+    City: string;
+    Country: string;
+  }
+  
+  export interface InternationalCityData {
+    [cityName: string]: InternationalEpisode[];
+  }
+  
+  export interface InternationalCountryData {
+    country: string;
+    cities: InternationalCityData[];
+  }
+  
+  export interface ProcessedInternationalCountryData {
+    country: string;
+    countryName: string;
+    cities: {
+      name: string;
+      episodes: InternationalEpisode[];
+    }[];
+    totalEpisodes: number;
+  }
   
   export interface SearchResult {
     type: 'state' | 'city';
     name: string;
     state?: string;
     episodes?: Episode[];
+    path: string;
+  }
+
+  export interface InternationalSearchResult {
+    type: 'country' | 'city';
+    name: string;
+    country?: string;
+    episodes?: InternationalEpisode[];
     path: string;
   }
   
