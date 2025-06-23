@@ -1,0 +1,27 @@
+{
+  "name": "Location Lookup - TV Episode Finder",
+  "short_name": "Location Lookup",
+  "description": "Find TV episodes filmed in your area. Search by state or city to discover home buying show episodes.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3B82F6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["entertainment", "utilities", "search"],
+  "lang": "en",
+  "dir": "ltr"
+} 
