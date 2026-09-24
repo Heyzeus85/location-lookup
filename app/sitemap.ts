@@ -3,7 +3,7 @@ import { getAllStatesData, getStaticPaths } from '@/lib/data'
 import { getAllInternationalCountriesData, getInternationalStaticPaths } from '@/lib/international-data'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://location-lookup.vercel.app'
+  const baseUrl = 'https://locationlookup.us'
   
   // Get all states data
   const allStatesData = await getAllStatesData()

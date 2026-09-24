@@ -49,15 +49,7 @@ export async function generateMetadata({ params }: CountryPageProps): Promise<Me
     openGraph: {
       title: `${countryData.countryName} TV Episodes - Location Lookup`,
       description: `Find ${episodeCount} international TV episodes filmed in ${countryData.countryName}. Explore ${cityCount} cities with home buying show episodes.`,
-      url: `https://location-lookup.vercel.app/int/countries/${params.country}/`,
-      images: [
-        {
-          url: '/og-image.jpg',
-          width: 1200,
-          height: 630,
-          alt: `${countryData.countryName} TV Episodes`,
-        },
-      ],
+      url: `https://locationlookup.us/int/countries/${params.country}/`,
     },
     twitter: {
       title: `${countryData.countryName} TV Episodes`,

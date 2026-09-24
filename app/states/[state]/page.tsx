@@ -48,15 +48,7 @@ export async function generateMetadata({ params }: StatePageProps): Promise<Meta
     openGraph: {
       title: `${stateData.stateName} TV Episodes - Location Lookup`,
       description: `Find ${episodeCount} TV episodes filmed in ${stateData.stateName}. Explore ${cityCount} cities with home buying show episodes.`,
-      url: `https://location-lookup.vercel.app/states/${params.state}/`,
-      images: [
-        {
-          url: '/og-image.jpg',
-          width: 1200,
-          height: 630,
-          alt: `${stateData.stateName} TV Episodes`,
-        },
-      ],
+      url: `https://locationlookup.us/states/${params.state}/`,
     },
     twitter: {
       title: `${stateData.stateName} TV Episodes`,

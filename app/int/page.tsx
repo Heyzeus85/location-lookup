@@ -20,15 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'International TV Episodes - Location Lookup',
     description: 'Explore home buying episodes from around the world. Find TV episodes filmed in international locations.',
-    url: 'https://location-lookup.vercel.app/int/',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'International TV Episodes',
-      },
-    ],
+    url: 'https://locationlookup.us/int/',
   },
   twitter: {
     title: 'International TV Episodes',
@@ -55,7 +47,7 @@ export default async function InternationalPage() {
     "@type": "WebPage",
     "name": "International TV Episodes",
     "description": "Find TV episodes filmed in international locations",
-    "url": "https://location-lookup.vercel.app/int/",
+    "url": "https://locationlookup.us/int/",
     "mainEntity": {
       "@type": "ItemList",
       "numberOfItems": allCountriesData.length,
@@ -66,7 +58,7 @@ export default async function InternationalPage() {
           "@type": "Place",
           "name": country.countryName,
           "description": `${country.totalEpisodes} TV episodes filmed in ${country.countryName}`,
-          "url": `https://location-lookup.vercel.app/int/countries/${country.countryName.toLowerCase().replace(/\s+/g, '-')}/`
+          "url": `https://locationlookup.us/int/countries/${country.countryName.toLowerCase().replace(/\s+/g, '-')}/`
         }
       }))
     }

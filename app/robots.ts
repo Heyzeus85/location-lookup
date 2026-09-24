@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/search/'],
     },
-    sitemap: 'https://location-lookup.vercel.app/sitemap.xml',
+    sitemap: 'https://locationlookup.us/sitemap.xml',
   }
 } 

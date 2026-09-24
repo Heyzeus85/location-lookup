@@ -20,15 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Home Buying Episode Lookup - Find TV Episodes by Location',
     description: 'Find home buying episodes by location. Search by state or city to discover TV episodes filmed in specific locations.',
-    url: 'https://location-lookup.vercel.app/',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Home Buying Episode Lookup',
-      },
-    ],
+    url: 'https://locationlookup.us/',
   },
   twitter: {
     title: 'Home Buying Episode Lookup',
@@ -55,7 +47,7 @@ export default async function Home() {
     "@type": "WebPage",
     "name": "Home Buying Episode Lookup",
     "description": "Find TV episodes filmed in your area",
-    "url": "https://location-lookup.vercel.app/",
+    "url": "https://locationlookup.us/",
     "mainEntity": {
       "@type": "ItemList",
       "numberOfItems": allStatesData.filter(state => state.state !== 'DC' && state.state !== 'UL').length,
@@ -68,7 +60,7 @@ export default async function Home() {
             "@type": "Place",
             "name": state.stateName,
             "description": `${state.totalEpisodes} TV episodes filmed in ${state.stateName}`,
-            "url": `https://location-lookup.vercel.app/states/${state.state}/`,
+            "url": `https://locationlookup.us/states/${state.state}/`,
             "numberOfEpisodes": state.totalEpisodes,
             "numberOfCities": state.cities.length
           }
@@ -76,7 +68,7 @@ export default async function Home() {
     },
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://location-lookup.vercel.app/search?q={search_term_string}",
+      "target": "https://locationlookup.us/search?q={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   }

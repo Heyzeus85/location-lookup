@@ -33,31 +33,22 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://location-lookup.vercel.app'),
+  metadataBase: new URL('https://locationlookup.us'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://location-lookup.vercel.app',
+    url: 'https://locationlookup.us',
     title: 'Location Lookup - Find TV Show Episodes by Filming Location',
     description: 'Discover TV episodes filmed in your area. Search by state or city to find home buying show episodes shot in specific locations across the United States and internationally.',
     siteName: 'Location Lookup',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Location Lookup - TV Show Episode Finder',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Location Lookup - Find TV Show Episodes by Filming Location',
     description: 'Discover TV episodes filmed in your area. Search by state or city to find home buying show episodes shot in specific locations.',
-    images: ['/og-image.jpg'],
     creator: '@locationlookup',
   },
   robots: {
@@ -96,10 +87,10 @@ export default function RootLayout({
               "@type": "WebSite",
               "name": "Location Lookup",
               "description": "Find TV show episodes by filming location",
-              "url": "https://location-lookup.vercel.app",
+              "url": "https://locationlookup.us",
               "potentialAction": {
                 "@type": "SearchAction",
-                "target": "https://location-lookup.vercel.app/search?q={search_term_string}",
+                "target": "https://locationlookup.us/search?q={search_term_string}",
                 "query-input": "required name=search_term_string"
               }
             })
