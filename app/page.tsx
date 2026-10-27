@@ -52,7 +52,7 @@ export default async function Home() {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "Home Buying Episode Lookup",
-    "description": "Find TV episodes filmed in your area",
+    "description": "Find TV episodes set in the cities you're curious about",
     "url": "https://locationlookup.us/",
     "mainEntity": {
       "@type": "ItemList",
@@ -92,10 +92,10 @@ export default async function Home() {
           <header className="mx-auto max-w-3xl pb-10 pt-12 text-center sm:pt-16">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-accent-700">House Hunters, by location</p>
             <h1 className="mb-4 text-4xl font-semibold text-ink sm:text-5xl">
-              Find the episodes filmed near you
+              Find episodes set in the cities you&apos;re curious about
             </h1>
             <p className="mx-auto mb-8 max-w-2xl text-lg text-ink-muted">
-              Search {episodeCount.toLocaleString('en-US')} home buying episodes by state or city, or pick a state on the map.
+              Search {episodeCount.toLocaleString('en-US')} home buying episodes by city or state, or pick a state on the map.
             </p>
             <LocationSearch endpoint="/api/search/" placeholder="Search for a state or city..." />
           </header>

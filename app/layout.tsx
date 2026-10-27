@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     default: 'Location Lookup - Find TV Show Episodes by Filming Location',
     template: '%s | Location Lookup'
   },
-  description: 'Discover TV episodes filmed in your area. Search by state or city to find home buying show episodes shot in specific locations across the United States and internationally.',
+  description: 'Find home buying episodes set in the cities that interest you. Search by city or state across the United States and internationally.',
   keywords: [
     'TV episodes',
     'filming locations', 
@@ -47,13 +47,13 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://locationlookup.us',
     title: 'Location Lookup - Find TV Show Episodes by Filming Location',
-    description: 'Discover TV episodes filmed in your area. Search by state or city to find home buying show episodes shot in specific locations across the United States and internationally.',
+    description: 'Find home buying episodes set in the cities that interest you. Search by city or state across the United States and internationally.',
     siteName: 'Location Lookup',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Location Lookup - Find TV Show Episodes by Filming Location',
-    description: 'Discover TV episodes filmed in your area. Search by state or city to find home buying show episodes shot in specific locations.',
+    description: 'Find home buying episodes set in the cities that interest you. Search by city or state.',
     creator: '@locationlookup',
   },
   robots: {
