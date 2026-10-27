@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-paper text-ink font-sans;
+  }
+
+  h1, h2, h3 {
+    @apply font-display tracking-tight;
+  }
+
+  :target {
+    scroll-margin-top: 5rem;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-2xl shadow-card border border-stone-200/70;
+  }
+
+  .card-interactive {
+    @apply card transition duration-200 hover:-translate-y-0.5 hover:shadow-lift hover:border-accent-300;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full bg-stone-100 px-2.5 py-0.5 text-xs font-medium text-ink-muted;
+  }
+
+  .section-title {
+    @apply text-2xl font-semibold text-ink;
+  }
+}
