@@ -1,7 +1,7 @@
 export interface Episode {
     Season: number;
     Episode: number;
-    Date: string;
+    Date: string | null;
     Title: string;
     Description: string;
     City: string;
@@ -73,6 +73,23 @@ export interface Episode {
     path: string;
   }
   
+  export interface LatestEpisode {
+    title: string;
+    season: number;
+    episode: number;
+    date: string;
+    place: string;
+    path: string;
+    airedAt: number;
+  }
+
+  export interface RankedCity {
+    name: string;
+    region: string;
+    path: string;
+    count: number;
+  }
+
   // US State mapping for display names
   export const US_STATES: Record<string, string> = {
     'AK': 'Alaska',

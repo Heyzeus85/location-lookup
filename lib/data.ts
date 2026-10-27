@@ -1,7 +1,12 @@
-import { StateData, ProcessedStateData, Episode, SearchResult, US_STATES } from '@/types';
+import { StateData, ProcessedStateData, Episode, SearchResult, LatestEpisode, US_STATES } from '@/types';
+import { readLocalDataFile } from './local-data';
+import { toSlug } from './slug';
 
 // Fetch episodes data from private GitHub repo
 async function fetchEpisodesData(): Promise<StateData[]> {
+ const localData = await readLocalDataFile<StateData[]>('episodes.json');
+ if (localData) return localData;
+
  if (!process.env.GITHUB_TOKEN) {
    throw new Error('GITHUB_TOKEN environment variable is required');
  }
@@ -112,7 +117,7 @@ export async function generateSearchIndex(): Promise<SearchResult[]> {
        type: 'city',
        name: `${city.name}, ${state.stateName}`,
        state: state.state,
-       path: `/states/${state.state.toLowerCase()}#${city.name.toLowerCase().replace(/\s+/g, '-')}`,
+       path: `/states/${state.state.toLowerCase()}#${toSlug(city.name)}`,
        episodes: city.episodes
      });
    });
@@ -154,4 +159,48 @@ export async function getStaticPaths() {
  return allStates.map(state => ({
    params: { state: state.state.toLowerCase() }
  }));
+}
+
+// Most recently aired episodes (excluding undated and future-dated ones)
+export async function getLatestEpisodes(limit: number = 6): Promise<LatestEpisode[]> {
+ const allStates = await getAllStatesData();
+ const now = Date.now();
+ const latest: LatestEpisode[] = [];
+
+ allStates.forEach(state => {
+   if (state.state === 'UL') return;
+   state.cities.forEach(city => {
+     city.episodes.forEach(episode => {
+       if (!episode.Date) return;
+       const airedAt = new Date(episode.Date).getTime();
+       if (Number.isNaN(airedAt) || airedAt > now) return;
+       latest.push({
+         title: episode.Title,
+         season: episode.Season,
+         episode: episode.Episode,
+         date: episode.Date,
+         place: `${city.name}, ${state.stateName}`,
+         path: `/states/${state.state.toLowerCase()}#${toSlug(city.name)}`,
+         airedAt
+       });
+     });
+   });
+ });
+
+ return latest.sort((a, b) => b.airedAt - a.airedAt).slice(0, limit);
+}
+
+// Cities ranked by number of episodes (fallback for the popularity list)
+export async function getMostFeaturedCities(limit: number = 10) {
+ const allStates = await getAllStatesData();
+ return allStates
+   .filter(state => state.state !== 'UL')
+   .flatMap(state => state.cities.map(city => ({
+     name: city.name,
+     region: state.stateName,
+     path: `/states/${state.state.toLowerCase()}#${toSlug(city.name)}`,
+     count: city.episodes.length
+   })))
+   .sort((a, b) => b.count - a.count)
+   .slice(0, limit);
 }

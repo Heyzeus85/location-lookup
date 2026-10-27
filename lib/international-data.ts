@@ -1,13 +1,16 @@
 import { countryCodeToName } from './country-codes';
+import { readLocalDataFile } from './local-data';
+import { toSlug } from './slug';
 import { 
   InternationalCountryData, 
   ProcessedInternationalCountryData, 
   InternationalEpisode, 
-  InternationalSearchResult 
+  InternationalSearchResult,
+  LatestEpisode
 } from '@/types';
 
-// Fetch international episodes data from private GitHub repo
-async function fetchInternationalEpisodesData(): Promise<InternationalCountryData[]> {
+// Fetch raw international episodes data from private GitHub repo
+async function fetchRemoteInternationalData(): Promise<any[]> {
   if (!process.env.GITHUB_TOKEN) {
     throw new Error('GITHUB_TOKEN environment variable is required');
   }
@@ -27,7 +30,11 @@ async function fetchInternationalEpisodesData(): Promise<InternationalCountryDat
     throw new Error(`Failed to fetch international episodes data: ${response.status}`);
   }
   
-  const rawData = await response.json();
+  return response.json();
+}
+
+async function fetchInternationalEpisodesData(): Promise<InternationalCountryData[]> {
+  const rawData = (await readLocalDataFile<any[]>('int_episodes.json')) ?? (await fetchRemoteInternationalData());
 
   return rawData.map((countryData: any) => {
     const cities = countryData.cities.map((cityObj: any) => {
@@ -142,7 +149,7 @@ export async function generateInternationalSearchIndex(): Promise<InternationalS
         type: 'city',
         name: `${city.name}, ${country.countryName}`,
         country: country.country,
-        path: `/int/countries/${countryPath}#${city.name.toLowerCase().replace(/\s+/g, '-')}`,
+        path: `/int/countries/${countryPath}#${toSlug(city.name)}`,
         episodes: city.episodes
       });
     });
@@ -184,4 +191,46 @@ export async function getInternationalStaticPaths() {
   return allCountries.map(country => ({
     params: { country: country.countryName.toLowerCase().replace(/\s+/g, '-') }
   }));
-} 
+}
+
+// Most recently aired episodes (excluding undated and future-dated ones)
+export async function getLatestInternationalEpisodes(limit: number = 6): Promise<LatestEpisode[]> {
+  const allCountries = await getAllInternationalCountriesData();
+  const now = Date.now();
+  const latest: LatestEpisode[] = [];
+
+  allCountries.forEach(country => {
+    country.cities.forEach(city => {
+      city.episodes.forEach(episode => {
+        if (!episode.Date) return;
+        const airedAt = new Date(episode.Date).getTime();
+        if (Number.isNaN(airedAt) || airedAt > now) return;
+        latest.push({
+          title: episode.Title,
+          season: episode.Season,
+          episode: episode.Episode,
+          date: episode.Date,
+          place: `${city.name}, ${country.countryName}`,
+          path: `/int/countries/${toSlug(country.countryName)}#${toSlug(city.name)}`,
+          airedAt
+        });
+      });
+    });
+  });
+
+  return latest.sort((a, b) => b.airedAt - a.airedAt).slice(0, limit);
+}
+
+// Cities ranked by number of episodes (fallback for the popularity list)
+export async function getMostFeaturedInternationalCities(limit: number = 10) {
+  const allCountries = await getAllInternationalCountriesData();
+  return allCountries
+    .flatMap(country => country.cities.map(city => ({
+      name: city.name,
+      region: country.countryName,
+      path: `/int/countries/${toSlug(country.countryName)}#${toSlug(city.name)}`,
+      count: city.episodes.length
+    })))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, limit);
+}
